@@ -1,0 +1,22 @@
+import { Container, Heading, Stack, Text, Button, HStack } from "@chakra-ui/react";
+import ImageSlider from "../components/ImageSlider";
+import { slides } from "../data/slides";
+
+
+export default function Hero() {
+    return (
+        <Container as={Stack} spacing={{ base: 6, md: 10 }} py={{ base: 6, md: 12 }}>
+            <ImageSlider items={slides} />
+            <Stack spacing={3} textAlign="center" pt={{ base: 2, md: 4 }}>
+                <Heading size={{ base: "lg", md: "2xl" }}>Asia Potolki — Premium Ceilings</Heading>
+                <Text color="slate.500" fontSize={{ base: "md", md: "lg" }}>
+                    Stretch ceilings, 3D designs, and integrated lighting. Fast, clean, guaranteed.
+                </Text>
+                <HStack justify="center" spacing={4} pt={2}>
+                    <Button size="lg">Get Free Estimate</Button>
+                    <Button size="lg" variant="outline">View Projects</Button>
+                </HStack>
+            </Stack>
+        </Container>
+    );
+}
