@@ -1,4 +1,4 @@
-import { Container, Heading, Stack, Text, Button, HStack, SimpleGrid, Card, CardHeader, CardBody, Icon, Box } from "@chakra-ui/react";
+import { Container, Heading, Stack, Text, Button, HStack, SimpleGrid, Card, CardHeader, CardBody, Icon } from "@chakra-ui/react";
 import { Wrench, Layers, Lightbulb, ArrowLeft, Calculator, Users, Clock, Shield } from "lucide-react";
 
 type ServicesPageProps = {
@@ -46,24 +46,27 @@ const services = [
 
 export default function ServicesPage({ onBackToHome }: ServicesPageProps) {
     return (
-        <Box>
+        <main role="main" aria-label="Services page">
             {/* Header Section */}
             <Container as={Stack} spacing={{ base: 6, md: 10 }} py={{ base: 6, md: 12 }}>
-                <Stack spacing={3} textAlign="center">
-                    <Button 
-                        leftIcon={<ArrowLeft />} 
-                        variant="ghost" 
-                        alignSelf="flex-start" 
-                        onClick={onBackToHome}
-                    >
-                        Back to Home
-                    </Button>
-                    <Heading size={{ base: "xl", md: "2xl" }}>Our Services</Heading>
-                    <Text color="slate.500" fontSize={{ base: "md", md: "lg" }} maxW="2xl" mx="auto">
-                        Professional stretch ceiling installation, lighting integration, and repair services. 
-                        Fast, clean, guaranteed work with 15+ years of experience.
-                    </Text>
-                </Stack>
+                <header>
+                    <Stack spacing={3} textAlign="center">
+                        <Button 
+                            leftIcon={<ArrowLeft />} 
+                            variant="ghost" 
+                            alignSelf="flex-start" 
+                            onClick={onBackToHome}
+                            aria-label="Go back to home page"
+                        >
+                            Back to Home
+                        </Button>
+                        <Heading as="h1" size={{ base: "xl", md: "2xl" }}>Our Services</Heading>
+                        <Text as="p" color="slate.500" fontSize={{ base: "md", md: "lg" }} maxW="2xl" mx="auto">
+                            Professional stretch ceiling installation, lighting integration, and repair services. 
+                            Fast, clean, guaranteed work with 15+ years of experience.
+                        </Text>
+                    </Stack>
+                </header>
             </Container>
 
             {/* Services Grid */}
@@ -116,6 +119,6 @@ export default function ServicesPage({ onBackToHome }: ServicesPageProps) {
                     </HStack>
                 </Stack>
             </Container>
-        </Box>
+        </main>
     );
 }

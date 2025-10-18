@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Container, Flex, HStack, IconButton, Link, Spacer, useColorMode } from "@chakra-ui/react";
 import { Moon, Sun } from "lucide-react";
 import Hero from "./sections/Hero";
@@ -8,19 +8,55 @@ import Footer from "./sections/Footer";
 import ServicesPage from "./pages/ServicesPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import GetQuotePage from "./pages/GetQuotePage";
+import { useSEO, seoData } from "./hooks/useSEO";
 
 export default function App() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const [currentPage, setCurrentPage] = useState<'home' | 'services' | 'projects' | 'quote'>('home');
+  
+  // Get initial page from URL
+  const getPageFromPath = () => {
+    const path = window.location.pathname;
+    if (path === '/services') return 'services';
+    if (path === '/projects') return 'projects';
+    if (path === '/quote' || path === '/contact') return 'quote';
+    return 'home';
+  };
+
+  const [currentPage, setCurrentPage] = useState<'home' | 'services' | 'projects' | 'quote'>(getPageFromPath());
+
+  // Dynamic SEO based on current page
+  useSEO(seoData[currentPage]);
 
   const navigateToHome = () => {
     setCurrentPage('home');
+    window.history.pushState({}, '', '/');
     setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
   };
 
-  const navigateToServices = () => setCurrentPage('services');
-  const navigateToProjects = () => setCurrentPage('projects');
-  const navigateToQuote = () => setCurrentPage('quote');
+  const navigateToServices = () => {
+    setCurrentPage('services');
+    window.history.pushState({}, '', '/services');
+  };
+
+  const navigateToProjects = () => {
+    setCurrentPage('projects');
+    window.history.pushState({}, '', '/projects');
+  };
+
+  const navigateToQuote = () => {
+    setCurrentPage('quote');
+    window.history.pushState({}, '', '/quote');
+  };
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPage(getPageFromPath());
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   return (
     <Box>
@@ -28,20 +64,20 @@ export default function App() {
       <Box as="header" position="sticky" top={0} zIndex={50} bg="rgba(255,255,255,0.7)" _dark={{ bg: "rgba(17,24,39,0.7)" }} style={{ backdropFilter: "saturate(180%) blur(12px)" }}>
         <Container>
           <Flex h={16} align="center">
-            <Link href="#" fontWeight={800} onClick={navigateToHome} cursor="pointer">
+            <Link as="button" fontWeight={800} onClick={navigateToHome} cursor="pointer">
               Asia Potolki
             </Link>
             <Spacer />
             <HStack spacing={6} display={{ base: "none", md: "flex" }}>
               <Link 
-                href="#" 
+                as="button"
                 onClick={navigateToServices}
                 cursor="pointer"
               >
                 Services
               </Link>
-              <Link href="#" onClick={navigateToProjects} cursor="pointer">Projects</Link>
-              <Link href="#" onClick={navigateToQuote} cursor="pointer">Get Quote</Link>
+              <Link as="button" onClick={navigateToProjects} cursor="pointer">Projects</Link>
+              <Link as="button" onClick={navigateToQuote} cursor="pointer">Get Quote</Link>
             </HStack>
             <IconButton ml={2} aria-label="Toggle color mode" icon={colorMode === "light" ? <Moon /> : <Sun />} onClick={toggleColorMode} variant="ghost" />
           </Flex>

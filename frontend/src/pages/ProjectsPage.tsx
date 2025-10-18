@@ -73,11 +73,12 @@ const projects = [
 
 export default function ProjectsPage({ onBackToHome }: ProjectsPageProps) {
     return (
-        <Box>
+        <main role="main" aria-label="Projects portfolio page">
             {/* Header Section */}
             <Container as={Stack} spacing={{ base: 6, md: 10 }} py={{ base: 6, md: 12 }}>
-                <Stack spacing={3} textAlign="center">
-                    <Button 
+                <header>
+                    <Stack spacing={3} textAlign="center">
+                        <Button 
                         leftIcon={<ArrowLeft />} 
                         variant="ghost" 
                         alignSelf="flex-start" 
@@ -85,17 +86,23 @@ export default function ProjectsPage({ onBackToHome }: ProjectsPageProps) {
                     >
                         Back to Home
                     </Button>
-                    <Heading size={{ base: "xl", md: "2xl" }}>Our Projects</Heading>
-                    <Text color="slate.500" fontSize={{ base: "md", md: "lg" }} maxW="2xl" mx="auto">
-                        Explore our portfolio of premium stretch ceiling installations. 
-                        From residential to commercial projects, see the quality and craftsmanship we deliver.
-                    </Text>
-                </Stack>
+                        <Heading as="h1" size={{ base: "xl", md: "2xl" }}>Our Projects</Heading>
+                        <Text as="p" color="slate.500" fontSize={{ base: "md", md: "lg" }} maxW="2xl" mx="auto">
+                            Explore our portfolio of premium stretch ceiling installations. 
+                            From residential to commercial projects, see the quality and craftsmanship we deliver.
+                        </Text>
+                    </Stack>
+                </header>
             </Container>
 
             {/* Projects Grid */}
             <Container py={{ base: 10, md: 16 }}>
-                <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
+                <SimpleGrid 
+                    columns={{ base: 1, md: 2, lg: 3 }} 
+                    gap={6}
+                    role="list"
+                    aria-label="Completed ceiling projects"
+                >
                     {projects.map((project) => (
                         <Box 
                             key={project.id} 
@@ -104,17 +111,21 @@ export default function ProjectsPage({ onBackToHome }: ProjectsPageProps) {
                             shadow="lg"
                             _hover={{ transform: "translateY(-2px)", shadow: "xl" }} 
                             transition="all 0.2s"
+                            role="listitem"
+                            as="article"
                         >
                             <Image 
                                 src={project.src} 
-                                alt={project.title} 
+                                alt={`${project.title} - ${project.description}`}
                                 objectFit="cover" 
                                 aspectRatio={4 / 3}
                                 w="full"
+                                loading="lazy"
+                                decoding="async"
                             />
                             <Stack p={5} spacing={3}>
-                                <Heading size="md">{project.title}</Heading>
-                                <Text fontSize="sm" color="brand.500" fontWeight="600">
+                                <Heading as="h3" size="md">{project.title}</Heading>
+                                <Text as="p" fontSize="sm" color="brand.500" fontWeight="600">
                                     {project.location}
                                 </Text>
                                 <Text color="slate.500" fontSize="sm">
@@ -146,6 +157,6 @@ export default function ProjectsPage({ onBackToHome }: ProjectsPageProps) {
                     </HStack>
                 </Stack>
             </Container>
-        </Box>
+        </main>
     );
 }

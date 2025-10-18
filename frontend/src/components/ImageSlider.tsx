@@ -47,7 +47,15 @@ export default function ImageSlider({ items, intervalMs = 5000 }: Props) {
           transition="opacity 400ms ease"
           opacity={i === index ? 1 : 0}
         >
-          <Image src={s.src} alt={s.alt} w="full" h={{ base: "220px", md: "480px" }} objectFit="cover" />
+          <Image 
+            src={s.src} 
+            alt={s.alt} 
+            w="full" 
+            h={{ base: "220px", md: "480px" }} 
+            objectFit="cover"
+            loading={i === 0 ? "eager" : "lazy"}
+            decoding="async"
+          />
 
           {/* Caption */}
           {s.caption && (

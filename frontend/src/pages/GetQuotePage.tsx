@@ -74,10 +74,11 @@ export default function GetQuotePage({ onBackToHome }: GetQuotePageProps) {
     };
 
     return (
-        <Box>
+        <main role="main" aria-label="Get quote and contact page">
             {/* Header Section */}
             <Container as={Stack} spacing={{ base: 6, md: 10 }} py={{ base: 6, md: 12 }}>
-                <Stack spacing={3} textAlign="center">
+                <header>
+                    <Stack spacing={3} textAlign="center">
                     <Button 
                         leftIcon={<ArrowLeft />} 
                         variant="ghost" 
@@ -86,12 +87,13 @@ export default function GetQuotePage({ onBackToHome }: GetQuotePageProps) {
                     >
                         Back to Home
                     </Button>
-                    <Heading size={{ base: "xl", md: "2xl" }}>Get a Free Quote</Heading>
-                    <Text color="slate.500" fontSize={{ base: "md", md: "lg" }} maxW="2xl" mx="auto">
-                        Ready to transform your space? Get a personalized quote for your stretch ceiling project. 
-                        Free consultation • No obligation • Expert advice guaranteed.
-                    </Text>
-                </Stack>
+                        <Heading as="h1" size={{ base: "xl", md: "2xl" }}>Get a Free Quote</Heading>
+                        <Text as="p" color="slate.500" fontSize={{ base: "md", md: "lg" }} maxW="2xl" mx="auto">
+                            Ready to transform your space? Get a personalized quote for your stretch ceiling project. 
+                            Free consultation • No obligation • Expert advice guaranteed.
+                        </Text>
+                    </Stack>
+                </header>
             </Container>
 
             {/* Contact Info Cards */}
@@ -299,6 +301,6 @@ export default function GetQuotePage({ onBackToHome }: GetQuotePageProps) {
                     </HStack>
                 </Stack>
             </Container>
-        </Box>
+        </main>
     );
 }

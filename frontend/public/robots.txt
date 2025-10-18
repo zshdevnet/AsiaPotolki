@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Block access to source files and configs
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /.env*
+Disallow: /vite.config.*
+Disallow: /tsconfig.*
+Disallow: /package*.json
+
+# Allow important SEO files
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Sitemap location
+Sitemap: https://asiapotolki.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
