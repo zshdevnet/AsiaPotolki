@@ -7,10 +7,11 @@ import Projects from "./sections/Projects";
 import Footer from "./sections/Footer";
 import ServicesPage from "./pages/ServicesPage";
 import ProjectsPage from "./pages/ProjectsPage";
+import GetQuotePage from "./pages/GetQuotePage";
 
 export default function App() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const [currentPage, setCurrentPage] = useState<'home' | 'services' | 'projects'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'services' | 'projects' | 'quote'>('home');
 
   const navigateToHome = () => {
     setCurrentPage('home');
@@ -19,6 +20,7 @@ export default function App() {
 
   const navigateToServices = () => setCurrentPage('services');
   const navigateToProjects = () => setCurrentPage('projects');
+  const navigateToQuote = () => setCurrentPage('quote');
 
   return (
     <Box>
@@ -39,7 +41,7 @@ export default function App() {
                 Services
               </Link>
               <Link href="#" onClick={navigateToProjects} cursor="pointer">Projects</Link>
-              <Link href="#" onClick={navigateToHome} cursor="pointer">Contact</Link>
+              <Link href="#" onClick={navigateToQuote} cursor="pointer">Get Quote</Link>
             </HStack>
             <IconButton ml={2} aria-label="Toggle color mode" icon={colorMode === "light" ? <Moon /> : <Sun />} onClick={toggleColorMode} variant="ghost" />
           </Flex>
@@ -49,7 +51,7 @@ export default function App() {
       {/* Page Content */}
       {currentPage === 'home' && (
         <main>
-          <Hero />
+          <Hero onGetQuote={navigateToQuote} onViewProjects={navigateToProjects} />
           <Box id="services"><Services onViewAll={navigateToServices} /></Box>
           <Box id="projects"><Projects onViewAll={navigateToProjects} /></Box>
           {/* You can add Calculator, FAQ, Contact next */}
@@ -65,6 +67,12 @@ export default function App() {
       {currentPage === 'projects' && (
         <main>
           <ProjectsPage onBackToHome={navigateToHome} />
+        </main>
+      )}
+
+      {currentPage === 'quote' && (
+        <main>
+          <GetQuotePage onBackToHome={navigateToHome} />
         </main>
       )}
 

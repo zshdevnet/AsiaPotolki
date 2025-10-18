@@ -2,8 +2,12 @@ import { Container, Heading, Stack, Text, Button, HStack } from "@chakra-ui/reac
 import ImageSlider from "../components/ImageSlider";
 import { slides } from "../data/slides";
 
+type HeroProps = {
+    onGetQuote?: () => void;
+    onViewProjects?: () => void;
+};
 
-export default function Hero() {
+export default function Hero({ onGetQuote, onViewProjects }: HeroProps) {
     return (
         <Container as={Stack} spacing={{ base: 6, md: 10 }} py={{ base: 6, md: 12 }}>
             <ImageSlider items={slides} />
@@ -13,8 +17,8 @@ export default function Hero() {
                     Stretch ceilings, 3D designs, and integrated lighting. Fast, clean, guaranteed.
                 </Text>
                 <HStack justify="center" spacing={4} pt={2}>
-                    <Button size="lg">Get Free Estimate</Button>
-                    <Button size="lg" variant="outline">View Projects</Button>
+                    <Button size="lg" onClick={onGetQuote}>Get Free Estimate</Button>
+                    <Button size="lg" variant="outline" onClick={onViewProjects}>View Projects</Button>
                 </HStack>
             </Stack>
         </Container>
