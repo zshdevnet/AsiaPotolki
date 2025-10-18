@@ -4,7 +4,7 @@ import { Facebook, Instagram, Phone } from "lucide-react";
 
 export default function Footer() {
     return (
-        <Container py={10}>
+        <Container id="contact" py={10}>
             <Divider mb={6} />
             <HStack justify="space-between">
                 <Text fontSize="sm">© {new Date().getFullYear()} Asia Potolki • asiapotolki.com</Text>
