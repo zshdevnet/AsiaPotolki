@@ -101,6 +101,12 @@ export const seoData = {
     keywords: 'interior design portfolio, completed projects, modern apartments, luxury homes, commercial design, space transformation, design gallery',
     canonicalUrl: 'https://asiapotolki.com/projects'
   },
+  materials: {
+    title: 'Premium Ceiling Materials Catalog - Matte, Glossy, Satin & Fabric',
+    description: 'Discover our premium stretch ceiling materials: matte, glossy, satin, and fabric finishes. Compare specifications, view galleries, and choose the perfect material for your project.',
+    keywords: 'stretch ceiling materials, matte ceiling, glossy ceiling, satin ceiling, fabric ceiling, ceiling finishes, premium ceiling materials, ceiling material catalog',
+    canonicalUrl: 'https://asiapotolki.com/materials'
+  },
   quote: {
     title: 'Get a Quote - Contact AsiaPotolki Interior Design',
     description: 'Get a personalized quote for your interior design project. Contact AsiaPotolki today for expert consultation and transform your space with our professional design services.',

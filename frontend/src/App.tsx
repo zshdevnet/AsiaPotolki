@@ -8,6 +8,7 @@ import Footer from "./sections/Footer";
 import ServicesPage from "./pages/ServicesPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import GetQuotePage from "./pages/GetQuotePage";
+import MaterialsCatalogPage from "./pages/MaterialsCatalogPage";
 import { useSEO, seoData } from "./hooks/useSEO";
 
 export default function App() {
@@ -18,11 +19,12 @@ export default function App() {
     const path = window.location.pathname;
     if (path === '/services') return 'services';
     if (path === '/projects') return 'projects';
+    if (path === '/materials') return 'materials';
     if (path === '/quote' || path === '/contact') return 'quote';
     return 'home';
   };
 
-  const [currentPage, setCurrentPage] = useState<'home' | 'services' | 'projects' | 'quote'>(getPageFromPath());
+  const [currentPage, setCurrentPage] = useState<'home' | 'services' | 'projects' | 'materials' | 'quote'>(getPageFromPath());
 
   // Dynamic SEO based on current page
   useSEO(seoData[currentPage]);
@@ -41,6 +43,11 @@ export default function App() {
   const navigateToProjects = () => {
     setCurrentPage('projects');
     window.history.pushState({}, '', '/projects');
+  };
+
+  const navigateToMaterials = () => {
+    setCurrentPage('materials');
+    window.history.pushState({}, '', '/materials');
   };
 
   const navigateToQuote = () => {
@@ -77,6 +84,7 @@ export default function App() {
                 Services
               </Link>
               <Link as="button" onClick={navigateToProjects} cursor="pointer">Projects</Link>
+              <Link as="button" onClick={navigateToMaterials} cursor="pointer">Materials</Link>
               <Link as="button" onClick={navigateToQuote} cursor="pointer">Get Quote</Link>
             </HStack>
             <IconButton ml={2} aria-label="Toggle color mode" icon={colorMode === "light" ? <Moon /> : <Sun />} onClick={toggleColorMode} variant="ghost" />
@@ -103,6 +111,12 @@ export default function App() {
       {currentPage === 'projects' && (
         <main>
           <ProjectsPage onBackToHome={navigateToHome} />
+        </main>
+      )}
+
+      {currentPage === 'materials' && (
+        <main>
+          <MaterialsCatalogPage onBackToHome={navigateToHome} />
         </main>
       )}
 
