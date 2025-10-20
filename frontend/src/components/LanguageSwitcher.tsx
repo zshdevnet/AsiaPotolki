@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Button,
   HStack,
@@ -10,6 +10,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useLanguage } from "../context/LanguageContext";
 
 type Lang = "RU" | "EN" | "TJ";
 
@@ -27,18 +28,14 @@ const LABEL: Record<Lang, string> = {
 };
 
 export default function LanguageSwitcher() {
-  const [lang, setLang] = useState<Lang>("RU");
+  const { lang, setLang } = useLanguage();
   const btnHover = useColorModeValue("gray.100", "gray.700");
 
   // Optional: remember last selected language
   useEffect(() => {
     const stored = window.localStorage.getItem("lang");
     if (stored === "RU" || stored === "EN" || stored === "TJ") setLang(stored);
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem("lang", lang);
-  }, [lang]);
+  }, [setLang]);
 
   const renderItem = (code: Lang) => (
     <MenuItem key={code} onClick={() => setLang(code)}>

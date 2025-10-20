@@ -20,9 +20,12 @@ import GetQuotePage from "./pages/GetQuotePage";
 import MaterialsCatalogPage from "./pages/MaterialsCatalogPage";
 import { useSEO, seoData } from "./hooks/useSEO";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import { useLanguage } from "./context/LanguageContext";
+import { navbarTexts } from "./i18n/navbar";
 
 export default function App() {
   const { colorMode, toggleColorMode } = useColorMode();
+  const { lang } = useLanguage();
 
   // Get initial page from URL
   const getPageFromPath = () => {
@@ -102,16 +105,16 @@ export default function App() {
             <Spacer />
             <HStack spacing={6} display={{ base: "none", md: "flex" }}>
               <Link as="button" onClick={navigateToServices} cursor="pointer">
-                Services
+                {navbarTexts[lang].services}
               </Link>
               <Link as="button" onClick={navigateToProjects} cursor="pointer">
-                Projects
+                {navbarTexts[lang].projects}
               </Link>
               <Link as="button" onClick={navigateToMaterials} cursor="pointer">
-                Materials
+                {navbarTexts[lang].materials}
               </Link>
               <Link as="button" onClick={navigateToQuote} cursor="pointer">
-                Get Quote
+                {navbarTexts[lang].quote}
               </Link>
             </HStack>
             <HStack spacing={1} ml={2}>
