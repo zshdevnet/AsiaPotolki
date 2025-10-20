@@ -8,6 +8,7 @@ import {
   Link,
   Spacer,
   useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Moon, Sun } from "lucide-react";
 import Hero from "./sections/Hero";
@@ -22,10 +23,12 @@ import { useSEO, seoData } from "./hooks/useSEO";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import { useLanguage } from "./context/LanguageContext";
 import { navbarTexts } from "./i18n/navbar";
+import { LayoutGroup, motion } from "framer-motion";
 
 export default function App() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { lang } = useLanguage();
+  const activeColor = useColorModeValue("brand.600", "brand.500");
 
   // Get initial page from URL
   const getPageFromPath = () => {
@@ -99,24 +102,127 @@ export default function App() {
               fontWeight={800}
               onClick={navigateToHome}
               cursor="pointer"
+              textDecoration="none"
+              _hover={{ textDecoration: "none" }}
             >
               Asia Potolki
             </Link>
             <Spacer />
-            <HStack spacing={6} display={{ base: "none", md: "flex" }}>
-              <Link as="button" onClick={navigateToServices} cursor="pointer">
-                {navbarTexts[lang].services}
-              </Link>
-              <Link as="button" onClick={navigateToProjects} cursor="pointer">
-                {navbarTexts[lang].projects}
-              </Link>
-              <Link as="button" onClick={navigateToMaterials} cursor="pointer">
-                {navbarTexts[lang].materials}
-              </Link>
-              <Link as="button" onClick={navigateToQuote} cursor="pointer">
-                {navbarTexts[lang].quote}
-              </Link>
-            </HStack>
+            <LayoutGroup>
+              <HStack spacing={6} display={{ base: "none", md: "flex" }}>
+                {/* Services */}
+                <Link
+                  as="button"
+                  onClick={navigateToServices}
+                  cursor="pointer"
+                  position="relative"
+                  textDecoration="none"
+                  _hover={{ color: activeColor, textDecoration: "none" }}
+                  color={"services" === currentPage ? activeColor : undefined}
+                  transition="color 0.2s ease"
+                  pb={1}
+                >
+                  {navbarTexts[lang].services}
+                  {"services" === currentPage && (
+                    <Box
+                      as={motion.div}
+                      layoutId="nav-underline"
+                      position="absolute"
+                      left={0}
+                      right={0}
+                      bottom={-1}
+                      height="2px"
+                      bg={activeColor}
+                      borderRadius="1px"
+                    />
+                  )}
+                </Link>
+
+                {/* Projects */}
+                <Link
+                  as="button"
+                  onClick={navigateToProjects}
+                  cursor="pointer"
+                  position="relative"
+                  textDecoration="none"
+                  _hover={{ color: activeColor, textDecoration: "none" }}
+                  color={"projects" === currentPage ? activeColor : undefined}
+                  transition="color 0.2s ease"
+                  pb={1}
+                >
+                  {navbarTexts[lang].projects}
+                  {"projects" === currentPage && (
+                    <Box
+                      as={motion.div}
+                      layoutId="nav-underline"
+                      position="absolute"
+                      left={0}
+                      right={0}
+                      bottom={-1}
+                      height="2px"
+                      bg={activeColor}
+                      borderRadius="1px"
+                    />
+                  )}
+                </Link>
+
+                {/* Materials */}
+                <Link
+                  as="button"
+                  onClick={navigateToMaterials}
+                  cursor="pointer"
+                  position="relative"
+                  textDecoration="none"
+                  _hover={{ color: activeColor, textDecoration: "none" }}
+                  color={"materials" === currentPage ? activeColor : undefined}
+                  transition="color 0.2s ease"
+                  pb={1}
+                >
+                  {navbarTexts[lang].materials}
+                  {"materials" === currentPage && (
+                    <Box
+                      as={motion.div}
+                      layoutId="nav-underline"
+                      position="absolute"
+                      left={0}
+                      right={0}
+                      bottom={-1}
+                      height="2px"
+                      bg={activeColor}
+                      borderRadius="1px"
+                    />
+                  )}
+                </Link>
+
+                {/* Get Quote */}
+                <Link
+                  as="button"
+                  onClick={navigateToQuote}
+                  cursor="pointer"
+                  position="relative"
+                  textDecoration="none"
+                  _hover={{ color: activeColor, textDecoration: "none" }}
+                  color={"quote" === currentPage ? activeColor : undefined}
+                  transition="color 0.2s ease"
+                  pb={1}
+                >
+                  {navbarTexts[lang].quote}
+                  {"quote" === currentPage && (
+                    <Box
+                      as={motion.div}
+                      layoutId="nav-underline"
+                      position="absolute"
+                      left={0}
+                      right={0}
+                      bottom={-1}
+                      height="2px"
+                      bg={activeColor}
+                      borderRadius="1px"
+                    />
+                  )}
+                </Link>
+              </HStack>
+            </LayoutGroup>
             <HStack spacing={1} ml={2}>
               <LanguageSwitcher />
               <IconButton
