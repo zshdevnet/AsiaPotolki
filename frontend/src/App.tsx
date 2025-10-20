@@ -11,9 +11,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Moon, Sun } from "lucide-react";
-import Hero from "./sections/Hero";
-import Services from "./sections/Services";
-import Projects from "./sections/Projects";
+import HomePage from "./pages/HomePage";
 import Footer from "./sections/Footer";
 import ServicesPage from "./pages/ServicesPage";
 import ProjectsPage from "./pages/ProjectsPage";
@@ -238,19 +236,11 @@ export default function App() {
 
       {/* Page Content */}
       {currentPage === "home" && (
-        <main>
-          <Hero
-            onGetQuote={navigateToQuote}
-            onViewProjects={navigateToProjects}
-          />
-          <Box id="services">
-            <Services onViewAll={navigateToServices} />
-          </Box>
-          <Box id="projects">
-            <Projects onViewAll={navigateToProjects} />
-          </Box>
-          {/* You can add Calculator, FAQ, Contact next */}
-        </main>
+        <HomePage
+          onGetQuote={navigateToQuote}
+          onViewProjects={navigateToProjects}
+          onViewServices={navigateToServices}
+        />
       )}
 
       {currentPage === "services" && (
