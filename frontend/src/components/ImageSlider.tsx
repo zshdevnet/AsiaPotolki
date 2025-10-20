@@ -24,7 +24,10 @@ export default function ImageSlider({ items, intervalMs = 5000 }: Props) {
 
   useEffect(() => {
     if (len <= 1) return;
-    timeout.current = window.setTimeout(() => setIndex((i) => (i + 1) % len), intervalMs);
+    timeout.current = window.setTimeout(
+      () => setIndex((i) => (i + 1) % len),
+      intervalMs
+    );
     return () => {
       if (timeout.current) window.clearTimeout(timeout.current);
     };
@@ -47,19 +50,36 @@ export default function ImageSlider({ items, intervalMs = 5000 }: Props) {
           transition="opacity 400ms ease"
           opacity={i === index ? 1 : 0}
         >
-          <Image 
-            src={s.src} 
-            alt={s.alt} 
-            w="full" 
-            h={{ base: "220px", md: "480px" }} 
+          <Image
+            src={s.src}
+            alt={s.alt}
+            w="full"
+            h={{ base: "220px", md: "480px" }}
             objectFit="cover"
             loading={i === 0 ? "eager" : "lazy"}
             decoding="async"
           />
 
+          {/* Dark overlay for better text readability */}
+          <Box
+            position="absolute"
+            inset={0}
+            pointerEvents="none"
+            bgGradient={{
+              base: "linear(to-b, blackAlpha.200, blackAlpha.600)",
+              md: "linear(to-b, blackAlpha.100, blackAlpha.700)",
+            }}
+          />
+
           {/* Caption */}
           {s.caption && (
-            <Box position="absolute" bottom={{ base: 6, md: 10 }} left={{ base: 4, md: 8 }} right={{ base: 4, md: 8 }}>
+            <Box
+              position="absolute"
+              zIndex={1}
+              bottom={{ base: 6, md: 10 }}
+              left={{ base: 4, md: 8 }}
+              right={{ base: 4, md: 8 }}
+            >
               <Text
                 as="h2"
                 fontSize={{ base: "2xl", md: "4xl" }}
@@ -77,7 +97,12 @@ export default function ImageSlider({ items, intervalMs = 5000 }: Props) {
 
       {/* Controls */}
       {!isSmall && (
-        <HStack justify="space-between" position="absolute" inset={0} px={{ base: 1, md: 2 }}>
+        <HStack
+          justify="space-between"
+          position="absolute"
+          inset={0}
+          px={{ base: 1, md: 2 }}
+        >
           <IconButton
             aria-label="Previous slide"
             icon={<ChevronLeft />}
@@ -100,7 +125,13 @@ export default function ImageSlider({ items, intervalMs = 5000 }: Props) {
       )}
 
       {/* Dots */}
-      <HStack position="absolute" bottom={{ base: 3, md: 5 }} left="50%" transform="translateX(-50%)" spacing={2}>
+      <HStack
+        position="absolute"
+        bottom={{ base: 3, md: 5 }}
+        left="50%"
+        transform="translateX(-50%)"
+        spacing={2}
+      >
         {items.map((_, i) => (
           <Box
             as="button"
