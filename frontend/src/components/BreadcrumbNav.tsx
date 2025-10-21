@@ -2,6 +2,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 
 export type Crumb = {
   label: string;
+  href?: string;
   onClick?: () => void;
 };
 
@@ -16,9 +17,15 @@ export default function BreadcrumbNav({ items }: Props) {
         const isLast = idx === items.length - 1;
         return (
           <BreadcrumbItem key={idx} isCurrentPage={isLast}>
-            {c.onClick && !isLast ? (
+            {!isLast ? (
               <BreadcrumbLink
-                onClick={c.onClick}
+                href={c.href || "#"}
+                onClick={(e) => {
+                  if (c.onClick) {
+                    e.preventDefault();
+                    c.onClick();
+                  }
+                }}
                 color="brand.600"
                 _dark={{ color: "brand.500" }}
               >
@@ -27,7 +34,7 @@ export default function BreadcrumbNav({ items }: Props) {
             ) : (
               <BreadcrumbLink
                 _hover={{ textDecoration: "none" }}
-                cursor={isLast ? "default" : "pointer"}
+                cursor="default"
               >
                 {c.label}
               </BreadcrumbLink>

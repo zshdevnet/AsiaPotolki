@@ -98,8 +98,8 @@ export default function ProjectsPage({ onBackToHome }: ProjectsPageProps) {
           <Stack spacing={3} textAlign="center">
             <BreadcrumbNav
               items={[
-                { label: "Home", onClick: onBackToHome },
-                { label: "Projects" },
+                { label: "Home", href: "/", onClick: onBackToHome },
+                { label: "Projects", href: "/projects" },
               ]}
             />
             <Heading as="h1" size={{ base: "xl", md: "2xl" }}>

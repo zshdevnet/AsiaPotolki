@@ -90,8 +90,8 @@ export default function GetQuotePage({ onBackToHome }: GetQuotePageProps) {
           <Stack spacing={3} textAlign="center">
             <BreadcrumbNav
               items={[
-                { label: "Home", onClick: onBackToHome },
-                { label: "Get Quote" },
+                { label: "Home", href: "/", onClick: onBackToHome },
+                { label: "Get Quote", href: "/quote" },
               ]}
             />
             <Heading as="h1" size={{ base: "xl", md: "2xl" }}>

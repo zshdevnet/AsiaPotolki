@@ -63,8 +63,8 @@ export default function MaterialDetailPage({
           {/* Breadcrumbs */}
           <BreadcrumbNav
             items={[
-              { label: "Home", onClick: onNavigateHome },
-              { label: "Materials", onClick: onBack },
+              { label: "Home", href: "/", onClick: onNavigateHome },
+              { label: "Materials", href: "/materials", onClick: onBack },
               { label: material.name },
             ]}
           />

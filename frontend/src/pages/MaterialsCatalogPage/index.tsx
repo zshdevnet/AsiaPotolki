@@ -269,8 +269,8 @@ export default function MaterialsCatalogPage({
           <Stack spacing={3} textAlign="center">
             <BreadcrumbNav
               items={[
-                { label: "Home", onClick: onBackToHome },
-                { label: "Materials" },
+                { label: "Home", href: "/", onClick: onBackToHome },
+                { label: "Materials", href: "/materials" },
               ]}
             />
             <Heading as="h1" size={{ base: "xl", md: "2xl" }}>
