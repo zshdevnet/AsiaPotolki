@@ -13,9 +13,10 @@ import {
   VStack,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { ArrowLeft, Sparkles, Circle, Layers, Shirt } from "lucide-react";
+import { Sparkles, Circle, Layers, Shirt } from "lucide-react";
 import { useState } from "react";
 import MaterialDetailPage from "./MaterialDetailPage";
+import BreadcrumbNav from "../../components/BreadcrumbNav";
 
 type MaterialsCatalogPageProps = {
   onBackToHome?: () => void;
@@ -251,6 +252,7 @@ export default function MaterialsCatalogPage({
       <MaterialDetailPage
         material={selectedMaterial}
         onBack={() => setSelectedMaterial(null)}
+        onNavigateHome={onBackToHome}
       />
     );
   }
@@ -265,15 +267,12 @@ export default function MaterialsCatalogPage({
       >
         <header>
           <Stack spacing={3} textAlign="center">
-            <Button
-              leftIcon={<ArrowLeft />}
-              variant="ghost"
-              alignSelf="flex-start"
-              onClick={onBackToHome}
-              aria-label="Go back to home page"
-            >
-              Back to Home
-            </Button>
+            <BreadcrumbNav
+              items={[
+                { label: "Home", onClick: onBackToHome },
+                { label: "Materials" },
+              ]}
+            />
             <Heading as="h1" size={{ base: "xl", md: "2xl" }}>
               Premium Ceiling Materials
             </Heading>

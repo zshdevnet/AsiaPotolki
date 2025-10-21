@@ -27,7 +27,6 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 import {
-  ArrowLeft,
   Check,
   Star,
   Shield,
@@ -39,15 +38,18 @@ import {
   Palette,
 } from "lucide-react";
 import type { MaterialType } from "./index";
+import BreadcrumbNav from "../../components/BreadcrumbNav";
 
 type MaterialDetailPageProps = {
   material: MaterialType;
   onBack: () => void;
+  onNavigateHome?: () => void;
 };
 
 export default function MaterialDetailPage({
   material,
   onBack,
+  onNavigateHome,
 }: MaterialDetailPageProps) {
   const cardBg = useColorModeValue("white", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.600");
@@ -58,15 +60,14 @@ export default function MaterialDetailPage({
       {/* Header Section */}
       <Container py={{ base: 6, md: 12 }}>
         <Stack spacing={6}>
-          <Button
-            leftIcon={<ArrowLeft />}
-            variant="ghost"
-            alignSelf="flex-start"
-            onClick={onBack}
-            aria-label="Back to materials catalog"
-          >
-            Back to Materials
-          </Button>
+          {/* Breadcrumbs */}
+          <BreadcrumbNav
+            items={[
+              { label: "Home", onClick: onNavigateHome },
+              { label: "Materials", onClick: onBack },
+              { label: material.name },
+            ]}
+          />
 
           {/* Hero Section */}
           <SimpleGrid columns={{ base: 1, lg: 2 }} gap={8} alignItems="center">
